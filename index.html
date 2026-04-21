@@ -119,58 +119,57 @@
     <footer>Machine à Langue &copy; 2026 - Mohamed EL Khoumssi.</footer>
 
     <script>
-        const database = {
+       const database = {
             reception: { title: "Réception de l'Écrit", icon: "📖", lessons: [
-                { id: "r1", t: "Genres Littéraires", d: "Roman, Poésie, Théâtre.", long: "<h2>Le Roman</h2><p>Une narration longue en prose.</p><h2>Le Théâtre</h2><p>Conçu pour la scène.</p>", q: "Lequel est écrit pour être joué ?", o: ["Le Roman", "Le Théâtre"], a: 1 },
-                { id: "r2", t: "Types de Discours", d: "Narratif, descriptif.", long: "<h2>Narratif</h2><p>Raconte des actions.</p>", q: "Un texte décrivant un lieu est...", o: ["Narratif", "Descriptif"], a: 1 },
-                { id: "r3", t: "Implicite & Explicite", d: "Lire entre les lignes.", long: "<h2>Explicite</h2><p>Direct.</p>", q: "'Il fait chaud' pour ouvrir la fenêtre est...", o: ["Implicite", "Explicite"], a: 0 },
-                { id: "r4", t: "Énonciation", d: "Qui parle à qui ?", long: "<h2>Indices</h2><p>Je, Tu, Ici.</p>", q: "'Je' indique une énonciation...", o: ["Ancrée", "Coupée"], a: 0 },
-                { id: "r5", t: "Registres Littéraires", d: "Tragique, Comique.", long: "<h2>Le Tragique</h2><p>La fatalité.</p>", q: "Qui inspire la pitié ?", o: ["Tragique", "Pathétique"], a: 1 },
-                { id: "r6", t: "Lecture d'Image", d: "Angles et couleurs.", long: "<h2>Angles</h2><p>Plongée.</p>", q: "Vue d'en haut :", o: ["Plongée", "Contre-plongée"], a: 0 },
-                { id: "r7", t: "Le Paratexte", d: "Titre, auteur.", long: "<h2>Utilité</h2><p>Prépare la lecture.</p>", q: "La couverture est du...", o: ["Texte", "Paratexte"], a: 1 },
-                { id: "r8", t: "Fiche de Lecture", d: "Synthèse.", long: "<h2>Méthode</h2><p>Auteur, Genre, Thèmes.</p>", q: "Elle doit être :", o: ["Longue", "Synthétique"], a: 1 },
-                { id: "r9", t: "Visée Communicative", d: "Informer.", long: "<h2>Enjeux</h2><p>Intention de l'auteur.</p>", q: "Un mode d'emploi est :", o: ["Informatif", "Prescriptif"], a: 1 },
-                { id: "r10", t: "Focalisation", d: "Point de vue.", long: "<h2>Zéro</h2><p>Narrateur omniscient.</p>", q: "Celui qui sait tout :", o: ["Interne", "Zéro"], a: 1 }
+                { id: "r1", t: "Genres Littéraires", d: "Roman, Poésie, Théâtre.", fbId: "599573862707248", long: "<h2>Le Roman</h2><p>Analyse des structures narratives dans les œuvres intégrales.</p>", q: "Lequel est écrit pour être joué ?", o: ["Le Roman", "Le Théâtre"], a: 1 },
+                { id: "r2", t: "Types de Discours", d: "Narratif, descriptif.", fbId: "1165275061483863", long: "<h2>Les formes de discours</h2><p>Reconnaître l'intention de l'auteur à travers le texte.</p>", q: "Un texte décrivant un lieu est...", o: ["Narratif", "Descriptif"], a: 1 },
+                { id: "r3", t: "Implicite & Explicite", d: "Lire entre les lignes.", fbId: "1488109678486025", long: "<h2>L'implicite</h2><p>Comprendre ce qui n'est pas dit ouvertement.</p>", q: "L'ironie est une forme de...", o: ["L'implicite", "L'explicite"], a: 0 },
+                { id: "r4", t: "Énonciation", d: "Qui parle à qui ?", fbId: "1106883277334757", long: "<h2>Le système d'énonciation</h2><p>Indices de présence du locuteur.</p>", q: "'Je' indique une énonciation...", o: ["Ancrée", "Coupée"], a: 0 },
+                { id: "r5", t: "Registres Littéraires", d: "Tragique, Comique.", fbId: "843694304796473", long: "<h2>La tonalité</h2><p>L'effet produit sur le lecteur (pitié, rire, peur).</p>", q: "Qui inspire la pitié ?", o: ["Tragique", "Pathétique"], a: 1 },
+                { id: "r6", t: "Lecture d'Image", d: "Angles et couleurs.", fbId: "1157929425883656", long: "<h2>Analyse visuelle</h2><p>Comprendre la composition d'une affiche ou d'une couverture.</p>", q: "Vue d'en haut :", o: ["Plongée", "Contre-plongée"], a: 0 },
+                { id: "r7", t: "Le Paratexte", d: "Titre, auteur.", fbId: "1106883277334757", long: "<h2>Autour du texte</h2><p>L'importance des éléments périphériques.</p>", q: "La couverture est du...", o: ["Texte", "Paratexte"], a: 1 },
+                { id: "r8", t: "Fiche de Lecture", d: "Synthèse.", fbId: "599573862707248", long: "<h2>Méthodologie</h2><p>Savoir résumer l'essentiel d'une œuvre.</p>", q: "Elle doit être :", o: ["Longue", "Synthétique"], a: 1 },
+                { id: "r9", t: "Visée Communicative", d: "Informer.", fbId: "1165275061483863", long: "<h2>L'enjeu</h2><p>Pourquoi l'auteur a-t-il écrit ce texte ?</p>", q: "Un mode d'emploi est :", o: ["Informatif", "Prescriptif"], a: 1 },
+                { id: "r10", t: "Focalisation", d: "Point de vue.", fbId: "1488109678486025", long: "<h2>Le regard</h2><p>Zéro, interne ou externe.</p>", q: "Celui qui sait tout :", o: ["Interne", "Zéro"], a: 1 }
             ]},
             langue: { title: "Étude de la Langue", icon: "⚙️", lessons: [
-                { id: "l0", t: "Les Adjectifs", d: "Accords et fonctions.", fbId: "843694304796473", long: "<h2>L'adjectif qualificatif</h2><p>Il précise le sens du nom.</p>", q: "S'accorde-t-il avec le nom ?", o: ["Oui", "Non"], a: 0 },
-                { id: "l1", t: "Registres de Langue", d: "Soutenu, Familier.", long: "<h2>Soutenu</h2><p>Langage châtié.</p>", q: "'C'est ouf' est :", o: ["Courant", "Familier"], a: 1 },
-                { id: "l2", t: "Cohérence Textuelle", d: "Connecteurs.", long: "<h2>Outils</h2><p>Mais, donc, car.</p>", q: "'Cependant' exprime :", o: ["La cause", "L'opposition"], a: 1 },
-                { id: "l3", t: "Figures de Style", d: "Esthétique.", long: "<h2>Comparaison</h2><p>Utilise 'comme'.</p>", q: "'Le soleil dort' est une :", o: ["Personnification", "Litote"], a: 0 },
-                { id: "l4", t: "Modalisateurs", d: "Doute.", long: "<h2>Outils</h2><p>Peut-être.</p>", q: "'Possible que' exprime :", o: ["Certitude", "Éventualité"], a: 1 },
-                { id: "l5", t: "Valeurs des Temps", d: "Passé simple.", long: "<h2>Imparfait</h2><p>Habitude.</p>", q: "Action soudaine :", o: ["Passé Simple", "Imparfait"], a: 0 },
-                { id: "l6", t: "La Ponctuation", d: "Rythme.", long: "<h2>Deux-points</h2><p>Explication.</p>", q: "Lequel introduit une citation ?", o: ["Virgule", "Deux-points"], a: 1 },
-                { id: "l7", t: "Champ Lexical", d: "Réseaux de mots.", long: "<h2>Exemple</h2><p>Mer, sable.</p>", q: "Banc, tableau, craie :", o: ["Bureau", "École"], a: 1 },
-                { id: "l8", t: "Nominalisation", d: "Style dense.", long: "<h2>Transformation</h2><p>'Il part' -> 'Son départ'.</p>", q: "Nominalisez 'Gagner' :", o: ["La gagne", "La victoire"], a: 1 },
-                { id: "l9", t: "Discours Rapporté", d: "Direct/Indirect.", long: "<h2>Indirect</h2><p>Utilise 'que'.</p>", q: "Il dit: 'Je viens' -> ", o: ["Il dit qu'il vient", "Il dit je viens"], a: 0 },
-                { id: "l10", t: "Causalité", d: "Cause/Conséquence.", long: "<h2>Connecteurs</h2><p>Car, donc.</p>", q: "'Puisque' introduit une :", o: ["Cause", "Conséquence"], a: 0 }
+                { id: "l0", t: "Les Adjectifs", d: "Accords et fonctions.", fbId: "843694304796473", long: "<h2>L'adjectif</h2><p>Accords en genre et en nombre.</p>", q: "S'accorde-t-il ?", o: ["Oui", "Non"], a: 0 },
+                { id: "l1", t: "Registres de Langue", d: "Soutenu, Familier.", fbId: "1157929425883656", long: "<h2>Niveaux de langue</h2><p>Adapter son langage au contexte.</p>", q: "'C'est ouf' est :", o: ["Courant", "Familier"], a: 1 },
+                { id: "l2", t: "Cohérence Textuelle", d: "Connecteurs.", fbId: "1106883277334757", long: "<h2>La logique</h2><p>Lier les idées entre elles.</p>", q: "'Cependant' exprime :", o: ["La cause", "L'opposition"], a: 1 },
+                { id: "l3", t: "Figures de Style", d: "Esthétique.", fbId: "1165275061483863", long: "<h2>Procédés</h2><p>La métaphore, l'hyperbole, etc.</p>", q: "'Le soleil dort' est une :", o: ["Personnification", "Litote"], a: 0 },
+                { id: "l4", t: "Modalisateurs", d: "Doute.", fbId: "599573862707248", long: "<h2>Subjectivité</h2><p>L'expression de l'opinion personnelle.</p>", q: "'Possible que' exprime :", o: ["Certitude", "Éventualité"], a: 1 },
+                { id: "l5", t: "Valeurs des Temps", d: "Passé simple.", fbId: "1488109678486025", long: "<h2>Le récit</h2><p>Différence entre premier plan et arrière-plan.</p>", q: "Action soudaine :", o: ["Passé Simple", "Imparfait"], a: 0 },
+                { id: "l6", t: "La Ponctuation", d: "Rythme.", fbId: "843694304796473", long: "<h2>Les signes</h2><p>Donner du sens à la phrase.</p>", q: "Lequel introduit une citation ?", o: ["Virgule", "Deux-points"], a: 1 },
+                { id: "l7", t: "Champ Lexical", d: "Réseaux de mots.", fbId: "1157929425883656", long: "<h2>Vocabulaire</h2><p>Groupe de mots liés à un thème.</p>", q: "Banc, tableau :", o: ["Bureau", "École"], a: 1 },
+                { id: "l8", t: "Nominalisation", d: "Style dense.", fbId: "1106883277334757", long: "<h2>Grammaire</h2><p>Transformer un verbe en nom.</p>", q: "Nom de 'Gagner' :", o: ["La gagne", "La victoire"], a: 1 },
+                { id: "l9", t: "Discours Rapporté", d: "Direct/Indirect.", fbId: "1165275061483863", long: "<h2>Rapporter des paroles</h2><p>Les changements de temps et de pronoms.</p>", q: "Il dit: 'Je viens' -> ", o: ["Il dit qu'il vient", "Il dit je vient"], a: 0 },
+                { id: "l10", t: "Causalité", d: "Cause/Conséquence.", fbId: "1488109678486025", long: "<h2>Logique</h2><p>Exprimer l'origine et le résultat.</p>", q: "'Puisque' introduit une :", o: ["Cause", "Conséquence"], a: 0 }
             ]},
             oral: { title: "Production de l'Oral", icon: "🎤", lessons: [
-                { id: "o1", t: "L'Écoute Active", d: "Reformuler.", long: "<h2>Principe</h2><p>Valider la compréhension.</p>", q: "Utilité :", o: ["Temps", "Valider le message"], a: 1 },
-                { id: "o2", t: "Volume & Débit", d: "Voix.", long: "<h2>Voix</h2><p>Articuler.</p>", q: "Débit rapide = ", o: ["Assurance", "Stress"], a: 1 },
-                { id: "o3", t: "Langage Corporel", d: "Posture.", long: "<h2>Posture</h2><p>Droit.</p>", q: "Regardez :", o: ["Le sol", "Le public"], a: 1 },
-                { id: "o4", t: "Exposé Structuré", d: "Plan.", long: "<h2>Accroche</h2><p>Capter l'attention.</p>", q: "Elle se place :", o: ["Début", "Fin"], a: 0 },
-                { id: "o5", t: "Le Débat", d: "Idées.", long: "<h2>Règle</h2><p>Calme.</p>", q: "Dans un débat :", o: ["Crier", "Argumenter"], a: 1 },
-                { id: "o6", t: "Argument Oratoire", d: "Convaincre.", long: "<h2>Piliers</h2><p>Logos.</p>", q: "L'émotion est le :", o: ["Ethos", "Pathos"], a: 1 },
-                { id: "o7", t: "L'Interview", d: "Questions.", long: "<h2>Ouvertes</h2><p>Faire parler.</p>", q: "Question fermée = ", o: ["Oui/Non", "Texte"], a: 0 },
-                { id: "o8", t: "Lecture Expressive", d: "Le ton.", long: "<h2>Ton</h2><p>Ponctuation.</p>", q: "Pause courte :", o: ["Point", "Virgule"], a: 1 },
-                { id: "o9", t: "Compte Rendu Oral", d: "Synthèse.", long: "<h2>Objectif</h2><p>Neutre.</p>", q: "Il est :", o: ["Subjectif", "Objectif"], a: 1 },
-                { id: "o10", t: "Improvisation", d: "Réagir.", long: "<h2>Technique</h2><p>Exercice.</p>", q: "Elle demande :", o: ["Rien", "De l'exercice"], a: 1 }
+                { id: "o1", t: "L'Écoute Active", d: "Reformuler.", fbId: "1157929425883656", long: "<h2>Communication</h2><p>Savoir écouter pour bien répondre.</p>", q: "Utilité :", o: ["Temps", "Valider le message"], a: 1 },
+                { id: "o2", t: "Volume & Débit", d: "Voix.", fbId: "1106883277334757", long: "<h2>Élocution</h2><p>Gérer son stress par la voix.</p>", q: "Débit rapide = ", o: ["Assurance", "Stress"], a: 1 },
+                { id: "o3", t: "Langage Corporel", d: "Posture.", fbId: "843694304796473", long: "<h2>Le corps parle</h2><p>L'importance du regard et des gestes.</p>", q: "Regardez :", o: ["Le sol", "Le public"], a: 1 },
+                { id: "o4", t: "Exposé Structuré", d: "Plan.", fbId: "599573862707248", long: "<h2>Prise de parole</h2><p>Organiser ses idées devant un public.</p>", q: "L'accroche est au :", o: ["Début", "Fin"], a: 0 },
+                { id: "o5", t: "Le Débat", d: "Idées.", fbId: "1165275061483863", long: "<h2>Argumentation</h2><p>Défendre son point de vue avec respect.</p>", q: "Dans un débat :", o: ["Crier", "Argumenter"], a: 1 },
+                { id: "o6", t: "Argument Oratoire", d: "Convaincre.", fbId: "1488109678486025", long: "<h2>Rhétorique</h2><p>L'art de bien parler.</p>", q: "L'émotion est le :", o: ["Ethos", "Pathos"], a: 1 },
+                { id: "o7", t: "L'Interview", d: "Questions.", fbId: "1157929425883656", long: "<h2>Échange</h2><p>Savoir poser les bonnes questions.</p>", q: "Question fermée = ", o: ["Oui/Non", "Texte"], a: 0 },
+                { id: "o8", t: "Lecture Expressive", d: "Le ton.", fbId: "1106883277334757", long: "<h2>Interprétation</h2><p>Donner vie à un texte écrit.</p>", q: "Pause courte :", o: ["Point", "Virgule"], a: 1 },
+                { id: "o9", t: "Compte Rendu Oral", d: "Synthèse.", fbId: "843694304796473", long: "<h2>Objectivité</h2><p>Résumer une situation oralement.</p>", q: "Il est :", o: ["Subjectif", "Objectif"], a: 1 },
+                { id: "o10", t: "Improvisation", d: "Réagir.", fbId: "599573862707248", long: "<h2>Spontanéité</h2><p>Savoir parler sans notes.</p>", q: "Elle demande :", o: ["Rien", "De l'exercice"], a: 1 }
             ]},
             ecrit: { title: "Production de l'Écrit", icon: "✍️", lessons: [
-                { id: "e1", t: "Le Résumé", d: "Condenser.", long: "<h2>Règles</h2><p>Propres mots.</p>", q: "Copier ?", o: ["Oui", "Non"], a: 1 },
-                { id: "e2", t: "Plan de l'Essai", d: "Dialectique.", long: "<h2>Plan</h2><p>Thèse, Antithèse.</p>", q: "Oui/Non/Bilan :", o: ["Analytique", "Dialectique"], a: 1 },
-                { id: "e3", t: "Lettre Formelle", d: "Codes.", long: "<h2>Structure</h2><p>Objet.</p>", q: "L'objet est :", o: ["Avant", "Après"], a: 0 },
-                { id: "e4", t: "Le CV", d: "Parcours.", long: "<h2>Rubriques</h2><p>Expérience.</p>", q: "Il doit être :", o: ["Long", "Aéré"], a: 1 },
-                { id: "e5", t: "Le Pastiche", d: "Imiter.", long: "<h2>Méthode</h2><p>Imiter un auteur.</p>", q: "C'est une :", o: ["Critique", "Imitation"], a: 1 },
-                { id: "e6", t: "Écrit d'Invention", d: "Créativité.", long: "<h2>Consigne</h2><p>Respecter le genre.</p>", q: "Garder le style ?", o: ["Oui", "Non"], a: 0 },
-                { id: "e7", t: "La Synthèse", d: "Sources.", long: "<h2>Démarche</h2><p>Points communs.</p>", q: "Donne-t-on son avis ?", o: ["Oui", "Non"], a: 1 },
-                { id: "e8", t: "Le Commentaire", d: "Fond/Forme.", long: "<h2>Analyse</h2><p>Effets produits.</p>", q: "On explique le :", o: ["Quoi", "Comment"], a: 1 },
-                { id: "e9", t: "Connecteurs", d: "Logique.", long: "<h2>Variété</h2><p>En revanche.</p>", q: "'De surcroît' ajoute :", o: ["Opposition", "Addition"], a: 1 },
-                { id: "e10", t: "Rédaction Critique", d: "Argumenter.", long: "<h2>Structure</h2><p>Arguments illustrés.</p>", q: "Un argument est :", o: ["Vague", "Illustré"], a: 1 }
+                { id: "e1", t: "Le Résumé", d: "Condenser.", fbId: "1165275061483863", long: "<h2>Synthèse</h2><p>Réduire un texte sans perdre l'essentiel.</p>", q: "Copier ?", o: ["Oui", "Non"], a: 1 },
+                { id: "e2", t: "Plan de l'Essai", d: "Dialectique.", fbId: "1488109678486025", long: "<h2>Organisation</h2><p>Thèse, antithèse, synthèse.</p>", q: "Oui/Non/Bilan :", o: ["Analytique", "Dialectique"], a: 1 },
+                { id: "e3", t: "Lettre Formelle", d: "Codes.", fbId: "1157929425883656", long: "<h2>Administration</h2><p>Écrire une demande officielle.</p>", q: "L'objet est :", o: ["Avant", "Après"], a: 0 },
+                { id: "e4", t: "Le CV", d: "Parcours.", fbId: "1106883277334757", long: "<h2>Insertion</h2><p>Présenter ses compétences.</p>", q: "Il doit être :", o: ["Long", "Aéré"], a: 1 },
+                { id: "e5", t: "Le Pastiche", d: "Imiter.", fbId: "843694304796473", long: "<h2>Style</h2><p>Écrire 'à la manière de'.</p>", q: "C'est une :", o: ["Critique", "Imitation"], a: 1 },
+                { id: "e6", t: "Écrit d'Invention", d: "Créativité.", fbId: "599573862707248", long: "<h2>Imaginaire</h2><p>Libérer sa plume sous contrainte.</p>", q: "Garder le style ?", o: ["Oui", "Non"], a: 0 },
+                { id: "e7", t: "La Synthèse", d: "Sources.", fbId: "1165275061483863", long: "<h2>Confrontation</h2><p>Extraire des points communs de documents.</p>", q: "Donne-t-on son avis ?", o: ["Oui", "Non"], a: 1 },
+                { id: "e8", t: "Le Commentaire", d: "Fond/Forme.", fbId: "1488109678486025", long: "<h2>Analyse fine</h2><p>Expliquer comment le texte fonctionne.</p>", q: "On explique le :", o: ["Quoi", "Comment"], a: 1 },
+                { id: "e9", t: "Connecteurs", d: "Logique.", fbId: "1157929425883656", long: "<h2>Articulation</h2><p>L'ossature de votre rédaction.</p>", q: "'De surcroît' ajoute :", o: ["Opposition", "Addition"], a: 1 },
+                { id: "e10", t: "Rédaction Critique", d: "Argumenter.", fbId: "1106883277334757", long: "<h2>Jugement</h2><p>Exprimer un avis étayé sur une œuvre.</p>", q: "Un argument est :", o: ["Vague", "Illustré"], a: 1 }
             ]}
         };
-
         function init() {
             const menuGrid = document.getElementById('menuGrid');
             const contentArea = document.getElementById('contentArea');
