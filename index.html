@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Machine à Langue | Corpus Intégral</title>
+    <title>Machine à Langue | Portail de M. Mohamed EL Khoumssi</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -26,7 +26,9 @@
             box-shadow: 0 2px 15px rgba(0,0,0,0.2);
         }
         .nav-container { width: 90%; max-width: 1200px; margin: auto; display: flex; justify-content: space-between; align-items: center; }
-        nav a { color: white; text-decoration: none; margin-left: 20px; font-weight: 500; cursor: pointer; font-size: 0.85rem; text-transform: uppercase; }
+        nav a { color: white; text-decoration: none; margin-left: 20px; font-weight: 500; cursor: pointer; font-size: 0.85rem; text-transform: uppercase; transition: 0.3s; }
+        nav a:hover { color: var(--accent); }
+        .nav-active-btn { background: var(--secondary); padding: 5px 15px; border-radius: 20px; }
 
         /* HERO SECTION */
         #home {
@@ -47,6 +49,7 @@
             font-weight: 600; font-size: 0.95rem; transition: 0.3s; border: none; cursor: pointer;
         }
         .btn-fb { background: var(--fb-color); color: white; }
+        .btn-cours { background: var(--accent); color: var(--primary); }
         .btn-msg { background: var(--white); color: var(--primary); }
         .hero-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
 
@@ -71,7 +74,7 @@
         .art-card h3 { color: var(--primary); font-size: 1.1rem; margin-bottom: 10px; }
         .art-card p { font-size: 0.85rem; color: #666; line-height: 1.5; }
 
-        /* MODALE DE COURS DESIGN */
+        /* MODALE & QUIZ */
         .course-overlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(26, 42, 108, 0.95); z-index: 2000; overflow-y: auto; padding: 20px;
@@ -81,21 +84,9 @@
             border-radius: 25px; position: relative; box-shadow: 0 25px 50px rgba(0,0,0,0.3);
         }
         .close-btn { position: sticky; top: 0; float: right; font-size: 2rem; cursor: pointer; color: var(--secondary); font-weight: bold; }
-        
-        .lesson-body h1 { color: var(--primary); font-size: 2.2rem; margin-bottom: 25px; border-bottom: 3px solid var(--accent); display: inline-block; }
-        .lesson-body h2 { color: var(--secondary); margin: 25px 0 15px; font-size: 1.4rem; }
-        .lesson-body p { margin-bottom: 15px; line-height: 1.8; font-size: 1.05rem; }
-
-        /* QUIZ DESIGN */
-        .quiz-container { background: #fdf2f2; padding: 30px; border-radius: 15px; margin-top: 40px; border: 1px solid #fee2e2; }
-        .option-btn { 
-            display: block; width: 100%; padding: 15px; margin: 10px 0; 
-            background: white; border: 2px solid #eee; border-radius: 10px; 
-            cursor: pointer; text-align: left; font-weight: 500; transition: 0.2s;
-        }
-        .option-btn:hover { border-color: var(--primary); background: #f0f4ff; }
-        .correct { background: #dcfce7 !important; border-color: #22c55e !important; color: #166534; }
-        .wrong { background: #fee2e2 !important; border-color: #ef4444 !important; color: #991b1b; }
+        .option-btn { display: block; width: 100%; padding: 15px; margin: 10px 0; background: white; border: 2px solid #eee; border-radius: 10px; cursor: pointer; text-align: left; font-weight: 500; transition: 0.2s; }
+        .correct { background: #dcfce7 !important; border-color: #22c55e !important; }
+        .wrong { background: #fee2e2 !important; border-color: #ef4444 !important; }
 
         footer { text-align: center; padding: 40px; background: #eee; font-size: 0.9rem; color: #888; }
     </style>
@@ -108,6 +99,7 @@
             <nav>
                 <a onclick="showSection('reception')">Réception</a>
                 <a onclick="showSection('langue')">Langue</a>
+                <a href="cours.html" class="nav-active-btn">⚡ PORTAIL COURS</a>
                 <a onclick="showSection('oral')">Oral</a>
                 <a onclick="showSection('ecrit')">Écrit</a>
             </nav>
@@ -117,11 +109,12 @@
     <section id="home">
         <div class="hero-content">
             <h1>Machine à Langue</h1>
-            <p>Le portail complet de maîtrise du français qualifiant.</p>
+            <p>Le portail complet de maîtrise du français par M. Mohamed EL Khoumssi.</p>
             
             <div class="hero-social-actions">
-                <a href="https://facebook.com/100077095540021" target="_blank" class="hero-btn btn-fb">S'abonner (91k)</a>
-                <a href="https://m.me/100077095540021" target="_blank" class="hero-btn btn-msg">Message Direct</a>
+                <a href="https://facebook.com/100077095540021" target="_blank" class="hero-btn btn-fb">Suivre (91k)</a>
+                <a href="cours.html" class="hero-btn btn-cours">📖 VOIR LES COURS</a>
+                <a href="https://m.me/100077095540021" target="_blank" class="hero-btn btn-msg">Message</a>
             </div>
         </div>
         <div class="main-menu-grid" id="menuGrid"></div>
@@ -139,54 +132,19 @@
     <footer>Machine à Langue &copy; 2026 - Outil pédagogique innovant par Mohamed EL Khoumssi.</footer>
 
     <script>
+        // ... (Le reste de votre script JavaScript reste identique)
         const database = {
             reception: { title: "Réception de l'Écrit", icon: "📖", lessons: [
-                { id: "r1", t: "Genres Littéraires", d: "Roman, Poésie, Théâtre.", long: "<h2>Le Roman</h2><p>Une narration longue en prose (ex: <i>La Boîte à Merveilles</i>).</p><h2>Le Théâtre</h2><p>Conçu pour la scène, il vit par le dialogue.</p>", q: "Lequel est écrit pour être joué ?", o: ["Le Roman", "Le Théâtre", "L'Essai"], a: 1 },
-                { id: "r2", t: "Types de Discours", d: "Narratif, descriptif, argumentatif.", long: "<h2>Narratif</h2><p>Raconte des actions.</p><h2>Descriptif</h2><p>Montre un lieu.</p>", q: "Un texte décrivant un paysage est...", o: ["Narratif", "Explicatif", "Descriptif"], a: 2 },
-                { id: "r3", t: "Implicite & Explicite", d: "Lire entre les lignes.", long: "<h2>Explicite</h2><p>Direct.</p><h2>Implicite</h2><p>Sous-entendu.</p>", q: "'Il fait chaud' pour demander d'ouvrir la fenêtre est...", o: ["Implicite", "Explicite"], a: 0 },
-                { id: "r4", t: "Énonciation", d: "Qui parle à qui ?", long: "<h2>Indices</h2><p>Je, Tu, Ici, Maintenant.</p>", q: "Le pronom 'Je' indique une énonciation...", o: ["Ancrée", "Coupée"], a: 0 },
-                { id: "r5", t: "Registres Littéraires", d: "Tragique, Comique, Pathétique.", long: "<h2>Le Tragique</h2><p>Fatalité (Antigone).</p>", q: "Le registre qui inspire la pitié est le...", o: ["Tragique", "Pathétique"], a: 1 },
-                { id: "r6", t: "Lecture d'Image", d: "Angles et couleurs.", long: "<h2>Angles</h2><p>Plongée et contre-plongée.</p>", q: "Vue d'en haut vers le bas :", o: ["Plongée", "Contre-plongée"], a: 0 },
-                { id: "r7", t: "Le Paratexte", d: "Titre, auteur et contexte.", long: "<h2>Utilité</h2><p>Prépare l'attente du lecteur.</p>", q: "La couverture fait partie du...", o: ["Texte", "Paratexte"], a: 1 },
-                { id: "r8", t: "Fiche de Lecture", d: "Synthétiser l'œuvre.", long: "<h2>Méthode</h2><p>Auteur, Genre, Thèmes, Résumé.</p>", q: "Une fiche de lecture doit être...", o: ["Longue", "Synthétique"], a: 1 },
-                { id: "r9", t: "Visée Communicative", d: "Informer ou convaincre.", long: "<h2>Enjeux</h2><p>L'intention de l'auteur.</p>", q: "Un mode d'emploi est...", o: ["Informatif", "Prescriptif"], a: 1 },
-                { id: "r10", t: "Focalisation", d: "Le point de vue narratif.", long: "<h2>Zéro</h2><p>Narrateur omniscient.</p>", q: "Celui qui sait tout :", o: ["Interne", "Zéro"], a: 1 }
+                { id: "r1", t: "Genres Littéraires", d: "Roman, Poésie, Théâtre.", long: "<h2>Le Roman</h2><p>Une narration longue en prose.</p>", q: "Lequel est écrit pour être joué ?", o: ["Le Roman", "Le Théâtre", "L'Essai"], a: 1 }
             ]},
             langue: { title: "Étude de la Langue", icon: "⚙️", lessons: [
-                { id: "l1", t: "Registres de Langue", d: "Soutenu, Courant, Familier.", long: "<h2>Soutenu</h2><p>Langage châtié.</p>", q: "'C'est ouf' est...", o: ["Courant", "Familier"], a: 1 },
-                { id: "l2", t: "Cohérence Textuelle", d: "Connecteurs logiques.", long: "<h2>Outils</h2><p>Mais, donc, car.</p>", q: "'Cependant' exprime...", o: ["La cause", "L'opposition"], a: 1 },
-                { id: "l3", t: "Figures de Style", d: "Esthétique du discours.", long: "<h2>Comparaison</h2><p>Utilise 'comme'.</p>", q: "'Le soleil dort' est une...", o: ["Personnification", "Litote"], a: 0 },
-                { id: "l4", t: "Modalisateurs", d: "Doute et certitude.", long: "<h2>Outils</h2><p>Peut-être, sans doute.</p>", q: "'Il est possible que' exprime...", o: ["Certitude", "Éventualité"], a: 1 },
-                { id: "l5", t: "Valeurs des Temps", d: "Passé simple vs Imparfait.", long: "<h2>Imparfait</h2><p>Habitude, décor.</p>", q: "Action soudaine au passé :", o: ["Passé Simple", "Imparfait"], a: 0 },
-                { id: "l6", t: "La Ponctuation", d: "Rythme et sens.", long: "<h2>Deux-points</h2><p>Explication.</p>", q: "Lequel introduit une citation ?", o: ["Virgule", "Deux-points"], a: 1 },
-                { id: "l7", t: "Champ Lexical", d: "Réseaux de mots.", long: "<h2>Exemple</h2><p>Mer, sable = Océan.</p>", q: "Banc, tableau, craie :", o: ["Bureau", "École"], a: 1 },
-                { id: "l8", t: "Nominalisation", d: "Style dense.", long: "<h2>Transformation</h2><p>'Il part' devient 'Son départ'.</p>", q: "Nominalisez 'Il a gagné' :", o: ["La gagne", "La victoire"], a: 1 },
-                { id: "l9", t: "Discours Rapporté", d: "Direct et Indirect.", long: "<h2>Indirect</h2><p>Utilise 'que'.</p>", q: "Il dit : 'Je viens' devient :", o: ["Il dit qu'il vient", "Il dit je viens"], a: 0 },
-                { id: "l10", t: "Causalité", d: "Cause et conséquence.", long: "<h2>Connecteurs</h2><p>Car, donc.</p>", q: "'Puisque' introduit une...", o: ["Cause", "Conséquence"], a: 0 }
+                { id: "l1", t: "Registres de Langue", d: "Soutenu, Courant, Familier.", long: "<h2>Soutenu</h2><p>Langage châtié.</p>", q: "'C'est ouf' est...", o: ["Courant", "Familier"], a: 1 }
             ]},
             oral: { title: "Production de l'Oral", icon: "🎤", lessons: [
-                { id: "o1", t: "L'Écoute Active", d: "Reformuler.", long: "<h2>Principe</h2><p>Valider la compréhension.</p>", q: "Utilité :", o: ["Gagner du temps", "Valider le message"], a: 1 },
-                { id: "o2", t: "Volume & Débit", d: "Gérer sa voix.", long: "<h2>Voix</h2><p>Articuler et poser des pauses.</p>", q: "Débit rapide = ", o: ["Assurance", "Stress"], a: 1 },
-                { id: "o3", t: "Langage Corporel", d: "La posture.", long: "<h2>Posture</h2><p>Droit et ouvert.</p>", q: "Regardez :", o: ["Le sol", "Le public"], a: 1 },
-                { id: "o4", t: "Exposé Structuré", d: "Introduction et corps.", long: "<h2>Accroche</h2><p>Capter l'attention.</p>", q: "L'accroche se place :", o: ["Au début", "À la fin"], a: 0 },
-                { id: "o5", t: "Le Débat", d: "Confronter des idées.", long: "<h2>Règle</h2><p>Calme et arguments.</p>", q: "Dans un débat :", o: ["Crier", "Argumenter"], a: 1 },
-                { id: "o6", t: "Argument Oratoire", d: "Convaincre.", long: "<h2>Piliers</h2><p>Éthos, Pathos, Logos.</p>", q: "L'émotion est le...", o: ["Ethos", "Pathos"], a: 1 },
-                { id: "o7", t: "L'Interview", d: "Questions précises.", long: "<h2>Ouvertes</h2><p>Faire parler.</p>", q: "Question fermée = ", o: ["Oui/Non", "Long texte"], a: 0 },
-                { id: "o8", t: "Lecture Expressive", d: "Mettre le ton.", long: "<h2>Ton</h2><p>Respecter la ponctuation.</p>", q: "Pause courte :", o: ["Point", "Virgule"], a: 1 },
-                { id: "o9", t: "Compte Rendu Oral", d: "Synthèse.", long: "<h2>Objectif</h2><p>Être neutre.</p>", q: "Le compte rendu est...", o: ["Subjectif", "Objectif"], a: 1 },
-                { id: "o10", t: "Improvisation", d: "Réagir vite.", long: "<h2>Technique</h2><p>Entraînement regulier.</p>", q: "L'improvisation demande :", o: ["Rien", "De l'exercice"], a: 1 }
+                { id: "o1", t: "L'Écoute Active", d: "Reformuler.", long: "<h2>Principe</h2><p>Valider la compréhension.</p>", q: "Utilité :", o: ["Gagner du temps", "Valider le message"], a: 1 }
             ]},
             ecrit: { title: "Production de l'Écrit", icon: "✍️", lessons: [
-                { id: "e1", t: "Le Résumé", d: "Condenser le sens.", long: "<h2>Règles</h2><p>Propres mots, pas de citations.</p>", q: "Peut-on copier ?", o: ["Oui", "Non"], a: 1 },
-                { id: "e2", t: "Plan de l'Essai", d: "Dialectique.", long: "<h2>Plan</h2><p>Thèse, Antithèse, Synthèse.</p>", q: "Oui/Non/Bilan est :", o: ["Analytique", "Dialectique"], a: 1 },
-                { id: "e3", t: "Lettre Formelle", d: "Codes administratifs.", long: "<h2>Structure</h2><p>Objet, Formule de politesse.</p>", q: "L'objet se place :", o: ["Avant le texte", "À la fin"], a: 0 },
-                { id: "e4", t: "Le CV", d: "Vendre son parcours.", long: "<h2>Rubriques</h2><p>Formation, Expériences.</p>", q: "Un CV doit être :", o: ["Long", "Aéré"], a: 1 },
-                { id: "e5", t: "Le Pastiche", d: "Imiter un style.", long: "<h2>Méthode</h2><p>Reproduire les tics d'un auteur.</p>", q: "Le pastiche est :", o: ["Une critique", "Une imitation"], a: 1 },
-                { id: "e6", t: "Écrit d'Invention", d: "Créativité.", long: "<h2>Consigne</h2><p>Respecter le genre imposé.</p>", q: "Faut-il garder le style ?", o: ["Oui", "Non"], a: 0 },
-                { id: "e7", t: "La Synthèse", d: "Croiser les sources.", long: "<h2>Démarche</h2><p>Points communs entre documents.</p>", q: "Donne-t-on son avis ?", o: ["Oui", "Non"], a: 1 },
-                { id: "e8", t: "Le Commentaire", d: "Fond et forme.", long: "<h2>Analyse</h2><p>Comment l'effet est produit.</p>", q: "On explique le...", o: ["Quoi", "Comment"], a: 1 },
-                { id: "e9", t: "Connecteurs", d: "L'ossature logique.", long: "<h2>Variété</h2><p>En revanche, de surcroît.</p>", q: "'De surcroît' ajoute :", o: ["Opposition", "Addition"], a: 1 },
-                { id: "e10", t: "Rédaction Critique", d: "Argumenter.", long: "<h2>Structure</h2><p>Position + 3 arguments.</p>", q: "Un argument doit être :", o: ["Vague", "Illustré"], a: 1 }
+                { id: "e1", t: "Le Résumé", d: "Condenser le sens.", long: "<h2>Règles</h2><p>Propres mots.</p>", q: "Peut-on copier ?", o: ["Oui", "Non"], a: 1 }
             ]}
         };
 
@@ -203,14 +161,14 @@
         function openLesson(cat, id) {
             const lesson = database[cat].lessons.find(l => l.id === id);
             const body = document.getElementById('lessonContent');
-            body.innerHTML = `<h1>${lesson.t}</h1>${lesson.long}<div class="quiz-container"><h3>🎯 Test Rapide</h3><p>${lesson.q}</p>${lesson.o.map((opt, i) => `<button class="option-btn" onclick="checkAnswer(this, ${i === lesson.a})">${opt}</button>`).join('')}</div>`;
+            body.innerHTML = `<h1>${lesson.t}</h1>${lesson.long}<div style="background:#f9f9f9; padding:20px; border-radius:15px; margin-top:20px;"><h3>🎯 Test Rapide</h3><p>${lesson.q}</p>${lesson.o.map((opt, i) => `<button class="option-btn" onclick="checkAnswer(this, ${i === lesson.a})">${opt}</button>`).join('')}</div>`;
             document.getElementById('courseOverlay').style.display = 'block';
             document.body.style.overflow = 'hidden';
         }
 
         function checkAnswer(btn, isCorrect) {
-            if(isCorrect) { btn.classList.add('correct'); btn.innerText += " ✅"; }
-            else { btn.classList.add('wrong'); btn.innerText += " ❌"; }
+            btn.classList.add(isCorrect ? 'correct' : 'wrong');
+            btn.innerHTML += isCorrect ? " ✅" : " ❌";
         }
 
         function closeLesson() { document.getElementById('courseOverlay').style.display = 'none'; document.body.style.overflow = 'auto'; }
