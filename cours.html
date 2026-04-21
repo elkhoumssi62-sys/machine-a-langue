@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portail Académique | M. Mohamed EL Khoumssi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            --instit-blue: #0f172a; 
+            --instit-gold: #b21f1f; 
+            --bg-soft: #f0f9ff; 
+            --accent-soft: #bae6fd;
+            /* Couleurs des 5 Piliers */
+            --c-morpho: #059669;
+            --c-phono: #2563eb;
+            --c-syntax: #d97706;
+            --c-seman: #dc2626;
+            --c-pragma: #7c3aed;
+        }
+        
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg-soft); color: #1e293b; margin: 0; line-height: 1.7; }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .reveal { animation: fadeInUp 0.8s ease-out forwards; }
+
+        header { background: white; border-bottom: 2px solid var(--instit-blue); padding: 1.2rem 0; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .nav-inner { width: 90%; max-width: 1100px; margin: auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--instit-blue); text-decoration: none; font-weight: bold; }
+        nav a { margin-left: 20px; text-decoration: none; color: #64748b; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; transition: 0.3s; }
+        nav a:hover { color: var(--instit-gold); }
+
+        .hero-acad { 
+            padding: 100px 20px; text-align: center; 
+            background: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.7)), url('https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=1500&q=80'); 
+            background-size: cover; background-position: center; border-bottom: 5px solid var(--instit-gold);
+            color: white;
+        }
+        .hero-acad h1 { font-family: 'Playfair Display', serif; font-size: 3.5rem; color: white; margin-bottom: 15px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        .hero-acad p { max-width: 800px; margin: auto; font-size: 1.2rem; color: #e2e8f0; font-weight: 300; }
+
+        .section-research { width: 90%; max-width: 1100px; margin: -50px auto 40px; display: grid; grid-template-columns: 2fr 1fr; gap: 30px; }
+        .card-acad { background: white; padding: 40px; border-radius: 15px; border: 1px solid #e2e8f0; box-shadow: 0 15px 35px rgba(15, 23, 42, 0.1); transition: 0.3s; }
+        .card-acad:hover { transform: translateY(-5px); }
+        
+        .pill-list { list-style: none; padding: 0; }
+        .pill-list li { padding: 18px 0; border-bottom: 1px solid #f1f5f9; display: flex; align-items: flex-start; gap: 15px; }
+        .pill-list li strong { display: block; font-size: 1.1rem; margin-bottom: 5px; }
+
+        /* Stickman & Icons Styling */
+        .stickman { font-size: 1.8rem; line-height: 1; display: inline-block; min-width: 35px; }
+        .pill-morpho { color: var(--c-morpho); }
+        .pill-phono { color: var(--c-phono); }
+        .pill-syntax { color: var(--c-syntax); }
+        .pill-seman { color: var(--c-seman); }
+        .pill-pragma { color: var(--c-pragma); }
+
+        .btn-group { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 25px; }
+        .btn-article, .btn-exercices { padding: 12px 25px; border-radius: 8px; cursor: pointer; font-weight: 600; transition: 0.3s; font-size: 0.9rem; border: none; }
+        
+        .btn-article { background: #f1f5f9; color: var(--instit-blue); border: 1px solid #cbd5e1; }
+        .btn-article:hover { background: var(--instit-blue); color: white; }
+        
+        .btn-exercices { background: var(--instit-gold); color: white; box-shadow: 0 4px 15px rgba(178, 31, 31, 0.3); }
+        .btn-exercices:hover { opacity: 0.9; transform: scale(1.02); }
+
+        /* Modales */
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(15, 23, 42, 0.95); overflow-y: auto; backdrop-filter: blur(5px); }
+        .modal-content { background-color: white; margin: 3% auto; padding: 50px; width: 90%; max-width: 900px; border-radius: 20px; line-height: 1.8; animation: fadeInUp 0.5s ease; position: relative; }
+        .close-btn { position: absolute; right: 25px; top: 20px; font-size: 35px; font-weight: bold; cursor: pointer; color: #94a3b8; transition: 0.3s; }
+        .close-btn:hover { color: var(--instit-gold); }
+        
+        .exo-section { padding: 25px; border-radius: 12px; margin-bottom: 25px; border-left: 8px solid var(--instit-blue); transition: 0.3s; background: #fff; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .exo-section:hover { transform: scale(1.01); }
+        .exo-section h3 { margin-top: 0; display: flex; align-items: center; gap: 10px; font-size: 1.4rem; }
+
+        /* Couleurs spécifiques exercices */
+        .border-morpho { border-color: var(--c-morpho); background: #f0fdf4; }
+        .border-phono { border-color: var(--c-phono); background: #eff6ff; }
+        .border-syntax { border-color: var(--c-syntax); background: #fffbeb; }
+        .border-seman { border-color: var(--c-seman); background: #fef2f2; }
+        .border-pragma { border-color: var(--c-pragma); background: #f5f3ff; }
+
+        footer { background: var(--instit-blue); color: white; padding: 60px 20px; text-align: center; margin-top: 80px; border-top: 4px solid var(--instit-gold); }
+        
+        @media (max-width: 768px) { .section-research { grid-template-columns: 1fr; } .btn-group { flex-direction: column; } }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="nav-inner">
+        <a href="index.html" class="logo">M. EL KHOUMSSI</a>
+        <nav>
+            <a href="index.html">Exercices</a>
+            <a href="#linguistique">Linguistique</a>
+            <a href="#vision">Vision</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </div>
+</header>
+
+<section class="hero-acad">
+    <div class="reveal">
+        <h1>Corpus & Recherche Didactique</h1>
+        <p>Expertise en ingénierie pédagogique et analyse du discours pour le cycle secondaire.</p>
+    </div>
+</section>
+
+<div class="section-research">
+    <div class="card-acad reveal" id="linguistique">
+        <h2 style="font-family: 'Playfair Display'; color: var(--instit-blue); border-bottom: 3px solid var(--instit-gold); display: inline-block; padding-bottom: 5px;">Le Projet : Les 5 Piliers</h2>
+        
+        <ul class="pill-list">
+            <li>
+                <span class="stickman pill-morpho">🧱</span>
+                <div><strong class="pill-morpho">◈ Morphologie & Lexicologie</strong> <p>L’Architecture du Mot : racines, affixes et néologismes.</p></div>
+            </li>
+            <li>
+                <span class="stickman pill-phono">🎧</span>
+                <div><strong class="pill-phono">◈ Phonologie & Phonétique</strong> <p>La Musique du Sens : rythme, accentuation et sons.</p></div>
+            </li>
+            <li>
+                <span class="stickman pill-syntax">🏗️</span>
+                <div><strong class="pill-syntax">◈ Syntaxe & Grammaire</strong> <p>La Logique de l’Assemblage : structure et cohésion.</p></div>
+            </li>
+            <li>
+                <span class="stickman pill-seman">📖</span>
+                <div><strong class="pill-seman">◈ Sémantique Textuelle</strong> <p>Le Réseau des Significations : profondeur du texte.</p></div>
+            </li>
+            <li>
+                <span class="stickman pill-pragma">💬</span>
+                <div><strong class="pill-pragma">◈ Pragmatique & Énonciation</strong> <p>La Langue en Acte : contexte et intention de parole.</p></div>
+            </li>
+        </ul>
+        
+        <div class="btn-group">
+            <button class="btn-article" onclick="openModal('articleModal')">📄 Lire l'article</button>
+            <button class="btn-exercices" onclick="openModal('exoModal')">✏️ 10 Exercices Pratiques</button>
+        </div>
+    </div>
+
+    <div class="card-acad reveal" id="projets">
+        <h3 style="color: var(--instit-gold); font-family: 'Playfair Display';">Identité Professionnelle</h3>
+        <div style="text-align: center; margin-bottom: 20px;">
+            <span style="font-size: 4rem;">👨‍🏫</span>
+        </div>
+        <p><strong>Lycée :</strong> Machine à Langue </p>
+        <p><strong>Province :</strong> Chefchaouen</p>
+        <p><strong>Niveaux :</strong> Tous les niveaux </p>
+        <div style="background: #f8fafc; padding: 15px; border-radius: 10px; margin-top: 20px; border-left: 4px solid var(--instit-gold);">
+            <p style="font-size: 0.9rem; font-style: italic; color: #475569; margin: 0;">"La rigueur scientifique au service de la réussite scolaire."</p>
+        </div>
+    </div>
+</div>
+
+<div id="articleModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal('articleModal')">&times;</span>
+        <h1 style="font-family: 'Playfair Display'; color: var(--instit-blue); border-bottom: 2px solid #eee; padding-bottom: 10px;">Les Cinq Piliers de la Maîtrise Linguistique</h1>
+        <img src="https://images.unsplash.com/photo-1457369804613-52c61a468e7d?auto=format&fit=crop&w=800&q=80" style="width: 100%; height: 250px; object-fit: cover; border-radius: 10px; margin: 20px 0;" alt="Linguistique">
+        <h3 style="color:var(--instit-gold)">1. Morphologie : L’Architecture du Mot</h3>
+        <p>En comprenant comment un mot est construit, on devient capable de deviner le sens de milliers de mots inconnus. C'est la base de l'autonomie lexicale.</p>
+        <p style="background: #f1f5f9; padding: 20px; border-radius: 10px; border-left: 4px solid var(--instit-blue);">Ce contenu est une base théorique essentielle pour tout étudiant désirant approfondir sa connaissance de la langue française.</p>
+    </div>
+</div>
+
+<div id="exoModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal('exoModal')">&times;</span>
+        <h1 style="font-family: 'Playfair Display'; color: var(--instit-blue);">Laboratoire Linguistique</h1>
+        <p style="color: #64748b; font-size: 1.1rem; margin-bottom: 30px;">👨‍💻 Relevez les défis et testez vos réflexes !</p>
+
+        <div class="exo-section border-morpho">
+            <h3 style="color: var(--c-morpho);">🧱 Morphologie & Lexicologie</h3>
+            <p><strong>Exercice 1 :</strong> Décomposez : <i>In-sur-mont-able</i>, <i>Ré-organ-isat-ion</i>, <i>A-politi-que</i>.</p>
+            <p><strong>Exercice 2 :</strong> À partir du radical "forme", créez 4 mots (nom, verbe, adj).</p>
+        </div>
+
+        <div class="exo-section border-phono">
+            <h3 style="color: var(--c-phono);">🎧 Phonologie & Phonétique</h3>
+            <p><strong>Exercice 3 :</strong> Prononcez et distinguez : <i>vin/bain</i>, <i>poisson/poison</i>.</p>
+            <p><strong>Exercice 4 :</strong> Déplacez l'accent sur : "C'est Mohamed qui a écrit ce livre."</p>
+        </div>
+
+        <div class="exo-section border-syntax">
+            <h3 style="color: var(--c-syntax);">🏗️ Syntaxe & Grammaire</h3>
+            <p><strong>Exercice 5 :</strong> Fusionnez : <i>L'élève étudie. Il veut réussir.</i></p>
+            <p><strong>Exercice 6 :</strong> Analysez les fonctions dans : "Hier, le professeur expliquait avec passion..."</p>
+        </div>
+
+        <div class="exo-section border-seman">
+            <h3 style="color: var(--c-seman);">📖 Sémantique Textuelle</h3>
+            <p><strong>Exercice 7 :</strong> Relevez le champ lexical de la nostalgie dans <i>La Boîte à Merveilles</i>.</p>
+            <p><strong>Exercice 8 :</strong> Expliquez "cœur" dans : <i>Par cœur</i> vs <i>Cœur sur la main</i>.</p>
+        </div>
+
+        <div class="exo-section border-pragma">
+            <h3 style="color: var(--c-pragma);">💬 Pragmatique & Énonciation</h3>
+            <p><strong>Exercice 9 :</strong> Relevez les indices du locuteur dans : "Je trouve que ce projet est brillant..."</p>
+            <p><strong>Exercice 10 :</strong> Analysez l'implicite : "Monsieur, la fenêtre est restée ouverte."</p>
+        </div>
+    </div>
+</div>
+
+<footer id="contact">
+    <p>🎓 <strong>Portail Académique de M. Mohamed EL Khoumssi</strong></p>
+    <p> Machine à langue | Province de Chefchaouen</p>
+    <p style="margin-top: 15px; opacity: 0.7; font-size: 0.8rem;">&copy; 2026 - Tous droits réservés</p>
+</footer>
+
+<script>
+    function openModal(id) { document.getElementById(id).style.display = "block"; document.body.style.overflow = "hidden"; }
+    function closeModal(id) { document.getElementById(id).style.display = "none"; document.body.style.overflow = "auto"; }
+    window.onclick = function(event) { if (event.target.className === 'modal') { event.target.style.display = "none"; document.body.style.overflow = "auto"; } }
+</script>
+
+</body>
+</html>
