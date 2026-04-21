@@ -30,7 +30,6 @@
         .nav-container { width: 90%; max-width: 1200px; margin: auto; display: flex; justify-content: space-between; align-items: center; }
         nav a { color: white; text-decoration: none; margin-left: 20px; font-weight: 500; cursor: pointer; font-size: 0.85rem; text-transform: uppercase; }
         
-        /* Style spécial pour le lien vers la nouvelle page dans le menu */
         .nav-link-new { background: var(--secondary); padding: 5px 12px; border-radius: 4px; font-weight: 600; }
 
         /* HERO SECTION */
@@ -43,7 +42,6 @@
         .hero-content h1 { font-size: 3.5rem; font-weight: 800; margin-bottom: 10px; letter-spacing: -1px; }
         .hero-content p { font-size: 1.2rem; opacity: 0.9; margin-bottom: 25px; }
 
-        /* BOUTONS SOCIAUX SUR L'ACCUEIL */
         .hero-social-actions {
             display: flex; gap: 15px; margin-bottom: 35px; flex-wrap: wrap; justify-content: center;
         }
@@ -53,7 +51,7 @@
         }
         .btn-fb { background: var(--fb-color); color: white; }
         .btn-msg { background: var(--white); color: var(--primary); }
-        .btn-new-page { background: var(--accent); color: var(--primary); } /* Nouveau bouton doré */
+        .btn-new-page { background: var(--accent); color: var(--primary); } 
         .hero-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
 
         .main-menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; width: 90%; max-width: 1100px; }
@@ -77,7 +75,7 @@
         .art-card h3 { color: var(--primary); font-size: 1.1rem; margin-bottom: 10px; }
         .art-card p { font-size: 0.85rem; color: #666; line-height: 1.5; }
 
-        /* MODALE DE COURS DESIGN */
+        /* MODALE & VIDEO CONTAINER */
         .course-overlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(26, 42, 108, 0.95); z-index: 2000; overflow-y: auto; padding: 20px;
@@ -86,6 +84,9 @@
             background: var(--white); max-width: 800px; margin: 40px auto; padding: 50px;
             border-radius: 25px; position: relative; box-shadow: 0 25px 50px rgba(0,0,0,0.3);
         }
+        .video-wrapper { position: relative; padding-top: 56.25%; width: 100%; margin-bottom: 25px; border-radius: 12px; overflow: hidden; background: #000; }
+        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+        
         .close-btn { position: sticky; top: 0; float: right; font-size: 2rem; cursor: pointer; color: var(--secondary); font-weight: bold; }
         
         .lesson-body h1 { color: var(--primary); font-size: 2.2rem; margin-bottom: 25px; border-bottom: 3px solid var(--accent); display: inline-block; }
@@ -161,6 +162,7 @@
                 { id: "r10", t: "Focalisation", d: "Le point de vue narratif.", long: "<h2>Zéro</h2><p>Narrateur omniscient.</p>", q: "Celui qui sait tout :", o: ["Interne", "Zéro"], a: 1 }
             ]},
             langue: { title: "Étude de la Langue", icon: "⚙️", lessons: [
+                { id: "l0", t: "Les Adjectifs", d: "Accords et fonctions.", fbId: "843694304796473", long: "<h2>L'adjectif qualificatif</h2><p>Il précise le sens du nom. Il peut être épithète ou attribut.</p>", q: "L'adjectif s'accorde-t-il avec le nom ?", o: ["Oui", "Non"], a: 0 },
                 { id: "l1", t: "Registres de Langue", d: "Soutenu, Courant, Familier.", long: "<h2>Soutenu</h2><p>Langage châtié.</p>", q: "'C'est ouf' est...", o: ["Courant", "Familier"], a: 1 },
                 { id: "l2", t: "Cohérence Textuelle", d: "Connecteurs logiques.", long: "<h2>Outils</h2><p>Mais, donc, car.</p>", q: "'Cependant' exprime...", o: ["La cause", "L'opposition"], a: 1 },
                 { id: "l3", t: "Figures de Style", d: "Esthétique du discours.", long: "<h2>Comparaison</h2><p>Utilise 'comme'.</p>", q: "'Le soleil dort' est une...", o: ["Personnification", "Litote"], a: 0 },
@@ -211,7 +213,21 @@
         function openLesson(cat, id) {
             const lesson = database[cat].lessons.find(l => l.id === id);
             const body = document.getElementById('lessonContent');
-            body.innerHTML = `<h1>${lesson.t}</h1>${lesson.long}<div class="quiz-container"><h3>🎯 Test Rapide</h3><p>${lesson.q}</p>${lesson.o.map((opt, i) => `<button class="option-btn" onclick="checkAnswer(this, ${i === lesson.a})">${opt}</button>`).join('')}</div>`;
+            
+            // Gestion de la vidéo Facebook si l'ID est présent
+            let videoHtml = "";
+            if (lesson.fbId) {
+                videoHtml = `
+                    <div class="video-wrapper">
+                        <iframe 
+                            src="https://www.facebook.com/plugins/video.php?href=https://www.facebook.com/facebook/videos/${lesson.fbId}/&show_text=0" 
+                            scrolling="no" frameborder="0" allowfullscreen="true" 
+                            allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+                        </iframe>
+                    </div>`;
+            }
+
+            body.innerHTML = `<h1>${lesson.t}</h1>${videoHtml}${lesson.long}<div class="quiz-container"><h3>🎯 Test Rapide</h3><p>${lesson.q}</p>${lesson.o.map((opt, i) => `<button class="option-btn" onclick="checkAnswer(this, ${i === lesson.a})">${opt}</button>`).join('')}</div>`;
             document.getElementById('courseOverlay').style.display = 'block';
             document.body.style.overflow = 'hidden';
         }
