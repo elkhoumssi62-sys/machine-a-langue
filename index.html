@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Examens Interactifs — Il était une fois un vieux couple heureux</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ====== NAV ====== -->
+<nav class="nav-index">
+  <div class="nav-inner">
+    <span class="nav-brand">Il était une fois…</span>
+    <span class="nav-sep">|</span>
+    <ul class="nav-exams" id="nav-exams-list" style="display:flex;gap:.4rem;list-style:none;padding:0;margin:0;flex-wrap:nowrap;"></ul>
+  </div>
+</nav>
+
+<!-- ====== HERO ====== -->
+<div class="hero">
+  <div class="hero-ornament">✦ ✦ ✦</div>
+  <h1><em>Il était une fois</em><br>un vieux couple heureux</h1>
+  <p class="hero-subtitle">Examens interactifs de compréhension et de production écrite</p>
+  <p class="hero-author">Mohammed Khaïr-Eddine &nbsp;·&nbsp; Éditions du Seuil, 2002</p>
+</div>
+
+<!-- ====== MAIN ====== -->
+<main class="container">
+
+  <!-- Welcome screen -->
+  <div id="welcome-screen">
+    <div class="welcome">
+      <h2>Bienvenue dans les 12 examens</h2>
+      <p>
+        Chaque examen propose un extrait du récit, <strong>10 questions interactives</strong>
+        avec correction immédiate, puis un <strong>sujet de production écrite</strong>
+        thématique accompagné d'une boîte à outils linguistiques.
+        Cliquez sur un examen pour commencer.
+      </p>
+    </div>
+    <div class="exam-grid" id="exam-grid"></div>
+  </div>
+
+  <!-- Exam panels rendered dynamically -->
+  <div id="exams-container"></div>
+
+</main>
+
+<script src="exams.js"></script>
+</body>
+</html>

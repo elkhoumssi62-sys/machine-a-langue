@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Machine à Langue | Masterclass Linguistique</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;600&family=Fira+Code:wght@400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0f172a; --accent: #b21f1f; --bg: #f8fafc;
+            --c-phono: #2563eb; --c-morpho: #059669; --c-syntax: #d97706;
+            --c-seman: #dc2626; --c-pragma: #7c3aed;
+        }
+
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: #334155; margin: 0; display: flex; height: 100vh; overflow: hidden; }
+
+        /* --- NAVIGATION --- */
+        aside { 
+            width: 320px; background: var(--primary); color: white; padding: 30px 20px; 
+            display: flex; flex-direction: column; box-shadow: 5px 0 15px rgba(0,0,0,0.1);
+        }
+        .brand h2 { font-family: 'Playfair Display'; font-size: 1.7rem; margin: 0; color: #fff; }
+        .nav-link {
+            background: none; border: none; color: #94a3b8; text-align: left; padding: 15px;
+            font-size: 0.95rem; cursor: pointer; border-radius: 10px; transition: 0.3s; margin-bottom: 5px;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .nav-link:hover { background: rgba(255,255,255,0.05); color: white; }
+        .nav-link.active { background: var(--accent); color: white; }
+
+        /* --- CONTENT --- */
+        main { flex: 1; overflow-y: auto; padding: 40px; scroll-behavior: smooth; }
+        .section-content { display: none; max-width: 850px; margin: auto; animation: fadeIn 0.4s ease; }
+        .section-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .course-header { border-bottom: 3px solid var(--accent); padding-bottom: 10px; margin-bottom: 25px; font-family: 'Playfair Display'; color: var(--primary); }
+        
+        .exo-card { 
+            background: white; border-radius: 15px; padding: 25px; margin-bottom: 20px; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05); border-left: 8px solid #cbd5e1;
+        }
+        .exo-card h4 { margin: 0 0 15px 0; color: var(--primary); display: flex; align-items: center; gap: 8px; }
+
+        .input-group { margin-top: 15px; }
+        input[type="text"], select { 
+            width: 100%; padding: 12px; border: 2px solid #e2e8f0; border-radius: 8px; 
+            font-size: 1rem; box-sizing: border-box; font-family: 'Fira Code', monospace;
+        }
+        .btn-check { 
+            margin-top: 12px; padding: 10px 25px; border-radius: 8px; border: none;
+            background: var(--primary); color: white; font-weight: 600; cursor: pointer;
+        }
+        .feedback { margin-top: 12px; padding: 10px; border-radius: 8px; display: none; font-weight: 600; }
+        .correct { background: #dcfce7; color: #166534; display: block; }
+        .wrong { background: #fee2e2; color: #991b1b; display: block; }
+
+        .score-box { position: fixed; bottom: 20px; right: 20px; background: white; padding: 15px 25px; border-radius: 50px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 2px solid var(--accent); font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<aside>
+    <div class="brand">
+        <h2>Machine à Langue</h2>
+        <p style="opacity: 0.7; font-size: 0.8rem;">Par Mohamed EL Khoumssi</p>
+    </div>
+    <hr style="width:100%; opacity:0.1; margin: 20px 0;">
+    <nav>
+        <button class="nav-link active" onclick="nav('phono')">🎧 1. Phonologie</button>
+        <button class="nav-link" onclick="nav('morpho')">🧱 2. Morphologie</button>
+        <button class="nav-link" onclick="nav('syntax')">🏗️ 3. Syntaxe</button>
+        <button class="nav-link" onclick="nav('seman')">📖 4. Sémantique</button>
+        <button class="nav-link" onclick="nav('pragma')">💬 5. Pragmatique</button>
+    </nav>
+</aside>
+
+<main>
+    <div class="score-box">Progression : <span id="score">0</span> / 15</div>
+
+    <section id="phono" class="section-content active">
+        <h1 class="course-header">Phonologie : L'univers des sons</h1>
+        
+        <div class="exo-card" style="border-color: var(--c-phono);">
+            <h4>Ex 1 : Paires minimales</h4>
+            <p>Identifiez les paires prouvant que /p/ et /b/ sont distincts (ex: mot1/mot2, mot3/mot4) :</p>
+            <input type="text" id="ex1" placeholder="pont/bon, pain/bain">
+            <button class="btn-check" onclick="v('ex1', ['pont/bon, pain/bain', 'pain/bain, pont/bon'])">Vérifier</button>
+            <div id="f-ex1" class="feedback"></div>
+        </div>
+
+        <div class="exo-card" style="border-color: var(--c-phono);">
+            <h4>Ex 2 : Transcription API</h4>
+            <p>Transcrivez "vin" et "ombre" (format : [vɛ̃], [ɔ̃bʁ]) :</p>
+            <input type="text" id="ex2" placeholder="[vɛ̃], [ɔ̃bʁ]">
+            <button class="btn-check" onclick="v('ex2', '[vɛ̃], [ɔ̃bʁ]')">Vérifier</button>
+            <div id="f-ex2" class="feedback"></div>
+        </div>
+
+        <div class="exo-card" style="border-color: var(--c-phono);">
+            <h4>Ex 3 : Syllabation</h4>
+            <p>Découpez "Institution" en syllabes phonétiques :</p>
+            <input type="text" id="ex3" placeholder="In-sti-tu-tion">
+            <button class="btn-check" onclick="v('ex3', 'in-sti-tu-tion')">Vérifier</button>
+            <div id="f-ex3" class="feedback"></div>
+        </div>
+    </section>
+
+    <section id="morpho" class="section-content">
+        <h1 class="course-header">Morphologie : L'architecture interne</h1>
+        
+        <div class="exo-card" style="border-color: var(--c-morpho);">
+            <h4>Ex 4 : Analyse segmentale</h4>
+            <p>Décomposez "Redéfinition" (préfixe-radical-suffixe) :</p>
+            <input type="text" id="ex4" placeholder="re-défin-ition">
+            <button class="btn-check" onclick="v('ex4', 're-défin-ition')">Vérifier</button>
+            <div id="f-ex4" class="feedback"></div>
+        </div>
+
+        <div class="exo-card" style="border-color: var(--c-morpho);">
+            <h4>Ex 5 : Flexion vs Dérivation</h4>
+            <p>Manger → Mangeons. Est-ce une flexion ou dérivation ?</p>
+            <select id="ex5">
+                <option value="">-- Choisir --</option>
+                <option value="flexion">Flexion</option>
+                <option value="dérivation">Dérivation</option>
+            </select>
+            <button class="btn-check" onclick="v('ex5', 'flexion')">Vérifier</button>
+            <div id="f-ex5" class="feedback"></div>
+        </div>
+
+        <div class="exo-card" style="border-color: var(--c-morpho);">
+            <h4>Ex 6 : Allomorphes</h4>
+            <p>Donnez l'allomorphe du radical de "Vouloir" au subjonctif présent (3e pers. pluriel) :</p>
+            <input type="text" id="ex6" placeholder="Qu'ils veu...">
+            <button class="btn-check" onclick="v('ex6', 'veuillent')">Vérifier</button>
+            <div id="f-ex6" class="feedback"></div>
+        </div>
+    </section>
+
+    <section id="syntax" class="section-content">
+        <h1 class="course-header">Syntaxe : La combinatoire</h1>
+        
+        <div class="exo-card" style="border-color: var(--c-syntax);">
+            <h4>Ex 7 : Fonctions grammaticales</h4>
+            <p>Dans "Il a offert des fleurs à sa mère", quelle est la fonction de "à sa mère" ?</p>
+            <input type="text" id="ex7" placeholder="Ex: COI">
+            <button class="btn-check" onclick="v('ex7', 'coi')">Vérifier</button>
+            <div id="f-ex7" class="feedback"></div>
+        </div>
+
+        <div class="exo-card" style="border-color: var(--c-syntax);">
+            <h4>Ex 8 : Transformation Passive</h4>
+            <p>"Le jury a sélectionné le candidat." → ...</p>
+            <input type="text" id="ex8" placeholder="Le candidat...">
+            <button class="btn-check" onclick="v('ex8', 'le candidat a été sélectionné par le jury')">Vérifier</button>
+            <div id="f-ex8" class="feedback"></div>
+        </div>
+
+        <div class="exo-card" style="border-color: var(--c-syntax);">
+            <h4>Ex 9 : Constituants (Arbre)</h4>
+            <p>Identifiez le SV dans : "Le jeune professeur explique une règle."</p>
+            <input type="text" id="ex9" placeholder="Explique une règle">
+            <button class="btn-check" onclick="v('ex9', 'explique une règle')">Vérifier</button>
+            <div id="f-ex9" class="feedback"></div>
+        </div>
+    </section>
+
+    <section id="seman" class="section-content">
+        <h1 class="course-header">Sémantique : Le réseau du sens</h1>
+        
+        <div class="exo-card" style="border-color: var(--c-seman);">
+            <h4>Ex 10 : Relations lexicales</h4>
+            <p>Donnez un antonyme de "Grand" :</p>
+            <input type="text" id="ex10" placeholder="Petit">
+            <button class="btn-check" onclick="v('ex10', 'petit')">Vérifier</button>
+            <div id="f-ex10" class="feedback"></div>
+        </div>
+
+        <div class="exo-card" style="border-color: var(--c-seman);">
+            <h4>Ex 11 : Polysémie</h4>
+            <p>Le "bureau" peut désigner un meuble ou une pièce. (Vrai/Faux)</p>
+            <input type="text" id="ex11" placeholder="Vrai">
+            <button class="btn-check" onclick="v('ex11', 'vrai')">Vérifier</button>
+            <div id="f-ex11" class="feedback"></div>
+        </div>
+
+        <div class="exo-card" style="border-color: var(--c-seman);">
+            <h4>Ex 12 : Champs lexicaux</h4>
+            <p>Lequel n'appartient pas à la 'Justice' : Juge, Avocat, Boulanger, Procès ?</p>
+            <input type="text" id="ex12" placeholder="Boulanger">
+            <button class="btn-check" onclick="v('ex12', 'boulanger')">Vérifier</button>
+            <div id="f-ex12" class="feedback"></div>
+        </div>
+    </section>
+
+    <section id="pragma" class="section-content">
+        <h1 class="course-header">Pragmatique : La langue en acte</h1>
+        
+        <div class="exo-card" style="border-color: var(--c-pragma);">
+            <h4>Ex 13 : Actes de langage</h4>
+            <p>"Peux-tu me passer le sel ?" est une requête directe ou indirecte ?</p>
+            <input type="text" id="ex13" placeholder="Indirecte">
+            <button class="btn-check" onclick="v('ex13', 'indirecte')">Vérifier</button>
+            <div id="f-ex13" class="feedback"></div>
+        </div>
+
+        <div class="exo-card" style="border-color: var(--c-pragma);">
+            <h4>Ex 14 : Déictiques</h4>
+            <p>Dans "Je suis ici", quel mot est un déictique de lieu ?</p>
+            <input type="text" id="ex14" placeholder="ici">
+            <button class="btn-check" onclick="v('ex14', 'ici')">Vérifier</button>
+            <div id="f-ex14" class="feedback"></div>
+        </div>
+
+        <div class="exo-card" style="border-color: var(--c-pragma);">
+            <h4>Ex 15 : Implicatures</h4>
+            <p>A : "Film ce soir ?" B : "Examen demain." B veut dire : (Oui/Non)</p>
+            <input type="text" id="ex15" placeholder="Non">
+            <button class="btn-check" onclick="v('ex15', 'non')">Vérifier</button>
+            <div id="f-ex15" class="feedback"></div>
+        </div>
+    </section>
+</main>
+
+<script>
+    let score = 0;
+    const solved = new Set();
+
+    function nav(id) {
+        document.querySelectorAll('.section-content').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+        event.currentTarget.classList.add('active');
+    }
+
+    function v(id, ans) {
+        const input = document.getElementById(id);
+        const val = input.value.trim().toLowerCase();
+        const feedback = document.getElementById('f-' + id);
+        let ok = Array.isArray(ans) ? ans.some(a => val === a.toLowerCase()) : (val === ans.toLowerCase());
+
+        feedback.style.display = "block";
+        if(ok) {
+            feedback.innerHTML = "✅ Correct !"; feedback.className = "feedback correct";
+            if(!solved.has(id)) { score++; solved.add(id); document.getElementById('score').innerText = score; }
+        } else {
+            feedback.innerHTML = "❌ Réessayez..."; feedback.className = "feedback wrong";
+        }
+    }
+</script>
+</body>
+</html>
