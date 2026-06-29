@@ -33,6 +33,13 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 
+# Streamlit secrets (clés API)
+.streamlit/secrets.toml
+
+# Python
+__pycache__/
+*.py[cod]
+
 # vercel
 .vercel
 
